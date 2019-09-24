@@ -1,0 +1,77 @@
+Table Users
+{
+  UserID integer [pk,increment]
+	FirstName varchar
+	LastName varchar
+  Login varchar [not null,unique]
+  Pass varchar [not null,unique]
+  Email varchar 
+}
+
+
+
+Table Photos 
+{
+  PhotoID integer [pk,increment]
+  Path varchar
+  PlaceID integer
+  Date date
+}
+
+Table Places
+{
+  PlaceID integer [pk,increment]
+  Name varchar
+  AddressID integer 
+  Longitude varchar
+  Latitude varchar
+}
+
+Table Ratings
+{
+  RatingID integer [pk,increment] 
+  UserID integer
+  PlaceID integer 
+  Value int [default: 1]
+}
+
+Table PlaceComments 
+{
+  PlaceCommentID integer [pk,increment]
+  UserID integer 
+  PlaceID integer 
+  Text varcharacter [not null]
+}
+
+Table SavedPlaces
+{
+  SavedPlacesID integer [pk,increment]
+  UserID integer
+  PlaceID integer 
+  Status StatusPlace [not null]
+}
+
+Table Address
+{
+  AddressID integer  [pk,increment]
+  City varchar [not null]
+  Street varchar (30) [not null]
+  Building varchar (30) [not null]
+}
+
+Enum StatusPlace
+{
+  Interested 
+  Visited
+}
+
+Ref: "Address"."AddressID" - "Places"."AddressID"
+
+
+
+
+
+
+
+
+

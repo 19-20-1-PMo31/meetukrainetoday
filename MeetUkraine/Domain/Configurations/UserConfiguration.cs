@@ -17,9 +17,6 @@ namespace Domain.Configurations
 
             builder.HasMany(u => u.PlaceComments).WithOne(p => p.User).HasForeignKey(k => k.UserId);
 
-            builder.Property(p => p.FirstName).IsRequired();
-
-            builder.Property(p => p.LastName).IsRequired();
         }
     }
 }

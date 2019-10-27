@@ -43,10 +43,10 @@ namespace MeetUkraineASP
             services.AddDbContext<MeetUkraineContext>(options =>
                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), builder => builder.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name)));
 
-            services.AddIdentity<User, IdentityRole>()
-
-            .AddEntityFrameworkStores<MeetUkraineContext>()
-            .AddDefaultTokenProviders();
+            services.AddDefaultIdentity<User>()
+                            .AddRoles<IdentityRole>()
+                            .AddDefaultUI(UIFramework.Bootstrap4)
+                            .AddEntityFrameworkStores<MeetUkraineContext>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -57,10 +57,13 @@ namespace MeetUkraineASP
                 options.Password.RequireLowercase = false;
             });
 
+            services.AddScoped<MeetUkraineContext>();
+            services.AddScoped<RoleManager<IdentityRole>>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,UserManager<User> u, RoleManager<IdentityRole>r,MeetUkraineContext context)
         {
             if (env.IsDevelopment())
             {
@@ -76,6 +79,9 @@ namespace MeetUkraineASP
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            DataInitializer.SeedData(u, r, context).Wait();
+
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

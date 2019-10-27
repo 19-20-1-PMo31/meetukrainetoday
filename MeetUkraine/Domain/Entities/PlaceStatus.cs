@@ -14,7 +14,7 @@ namespace Domain.Entities
     {
         public int PlaceStatusId { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
 
         public int PlaceId { get; set; }

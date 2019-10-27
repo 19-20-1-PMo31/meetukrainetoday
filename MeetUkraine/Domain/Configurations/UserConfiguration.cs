@@ -13,8 +13,6 @@ namespace Domain.Configurations
         {
             builder.ToTable("Users");
 
-            builder.HasKey(p => p.UserId);
-
             builder.HasMany(u => u.PlaceStatuses).WithOne(p => p.User).HasForeignKey(k=>k.UserId);
 
             builder.HasMany(u => u.PlaceComments).WithOne(p => p.User).HasForeignKey(k => k.UserId);

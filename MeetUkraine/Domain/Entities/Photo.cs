@@ -10,7 +10,6 @@ namespace Domain.Entities
 
         public string PhotoUrl { get; set; }
 
-        public int PlaceId { get; set; }
         public Place Place { get; set; }
 
         public DateTime PhotoDate { get; set; }

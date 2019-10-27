@@ -4,7 +4,14 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    class Photo
+    public class Photo
     {
+        public int PhotoId { get; set; }
+
+        public string PhotoUrl { get; set; }
+
+        public Place Place { get; set; }
+
+        public DateTime PhotoDate { get; set; }
     }
 }

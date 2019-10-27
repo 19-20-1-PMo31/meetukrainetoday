@@ -4,7 +4,16 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    class PlaceComment
+    public class PlaceComment
     {
+        public int PlaceCommentId { get; set; }
+
+        public string UserId { get; set; }
+        public User User { get; set; }
+
+        public int PlaceId { get; set; }
+        public Place Place { get; set; }
+
+        public string Comment { get; set; }
     }
 }

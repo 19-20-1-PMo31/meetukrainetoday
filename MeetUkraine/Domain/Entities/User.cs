@@ -12,5 +12,7 @@ namespace Domain.Entities
         public string LastName { get; set; }
 
         public ICollection<PlaceStatus> PlaceStatuses { get; set; }
+
+        public ICollection<PlaceComment> PlaceComments { get; set; }
     }
 }

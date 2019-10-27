@@ -13,9 +13,7 @@ namespace Domain.Entities
         public int AddressId { get; set; }
         public Address Address { get; set; }
 
-        public int RatingId { get; set; }
-        public Rating Rating { get; set; }
-
+        public ICollection<Rating> Ratings { get; set; }
         public ICollection<PlaceComment> PlaceComments { get; set; }
 
         public double Longtitude { get; set; }

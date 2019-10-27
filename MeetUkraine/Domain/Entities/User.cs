@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Entities
 {
-    class User
+    public class User:IdentityUser
     {
+        public int UserId { get; set; }
+
+        public string  FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public ICollection<PlaceStatus> PlaceStatuses { get; set; }
     }
 }

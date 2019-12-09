@@ -165,7 +165,8 @@ if (typeof jQuery === 'undefined') {
   }
 
 
-  // ALERT DATA-API
+  // ALERT DATA-
+
   // ==============
 
   $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)

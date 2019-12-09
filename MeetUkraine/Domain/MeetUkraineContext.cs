@@ -11,6 +11,7 @@ namespace Domain
     public class MeetUkraineContext:IdentityDbContext<User>
     {
         public DbSet<Place> Places { get; set; }
+        //public DbSet<string> Places { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
 
@@ -22,8 +23,9 @@ namespace Domain
 
         public DbSet<Rating> Ratings { get; set; }
 
+        public MeetUkraineContext() { }
 
-        public MeetUkraineContext(DbContextOptions<MeetUkraineContext> options):base(options)
+        public MeetUkraineContext(DbContextOptions<MeetUkraineContext> options) : base(options)
         {
 
         }

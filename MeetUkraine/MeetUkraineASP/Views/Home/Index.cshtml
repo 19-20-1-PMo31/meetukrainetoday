@@ -2,5 +2,39 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<h3>@ViewBag.data</h3>
+<h3>
+    @ViewBag.data
+</h3>
+
+
+
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d23104.443436704943!2d24.0266805754781!3d49.84311707819176!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add72f9bc6a89%3A0xf9783fecb4fecf1f!2z0JvRjNCy0L7QstGB0LrQuNC5INC90LDRhtC40L7QvdCw0LvRjNC90YvQuSDQsNC60LDQtNC10LzQuNGH0LXRgdC60LjQuSDRgtC10LDRgtGAINC-0L_QtdGA0Ysg0Lgg0LHQsNC70LXRgtCwINC40LzQtdC90Lgg0KHQvtC70L7QvNC40Lgg0JrRgNGD0YjQtdC70YzQvdC40YbQutC-0Lk!5e0!3m2!1sru!2sua!4v1575840880952!5m2!1sua!2sua" width="1000" height="600" frameborder="1" style="border:thin;" allowfullscreen=""></iframe>
+
+@if (User.IsInRole("Admin"))
+{
+    <form method="post" action="/Home/SetNewPlace">
+        <input name="PlaceName" type="text">
+
+        <input name="Address.City" type="text">
+        <input name="Address.Street" type="text">
+        <input name="Address.Building" type="text">
+
+        <input name="Longtitude" type="text">
+        <input name="Latitude" type="text">
+        <button type="submit">Go Add</button>
+    </form>
+}
+
+@if (User.IsInRole("Admin") || User.IsInRole("Traveller"))
+{
+    <ul>
+        @for (int i = 0; i < ViewBag.places; i++)
+        {
+            <li>@ViewBag.places[i].PlaceName</li>
+        }
+    </ul>
+}
+
+<h4>dddd</h4>
 

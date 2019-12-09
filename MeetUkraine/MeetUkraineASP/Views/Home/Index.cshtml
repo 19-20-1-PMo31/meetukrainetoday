@@ -28,12 +28,13 @@
 
 @if (User.IsInRole("Admin") || User.IsInRole("Traveller"))
 {
-    <ul>
-        @for (int i = 0; i < ViewBag.places; i++)
-        {
-            <li>@ViewBag.places[i].PlaceName</li>
-        }
-    </ul>
+<ul>
+    @for (int i = 0; i < ViewBag.places; i++)
+    {
+        <li>@ViewBag.places[i].PlaceName</li>
+        <a href="/Home/AddComent/@ViewBag.places[i].PlaceId"> add comment for @ViewBag.places[i].PlaceName</a>
+    }
+</ul>
 }
 
 <h4>dddd</h4>

@@ -44,5 +44,23 @@ namespace MeetUkraineASP.Controllers
             }
             return View("Index");
         }
+
+        [HttpGet]
+        public ActionResult AddComent(int PlaceId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddComent(int PlaceId , PlaceComment comment)
+        {
+            using (var a = new MeetUkraineContext())
+            {
+                Place test = a.Places.Where(item => item.PlaceId == PlaceId).FirstOrDefault();
+                test.PlaceComments.Add(comment);
+                a.SaveChanges();
+            }
+            return View();
+        }
     }
 }

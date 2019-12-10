@@ -23,7 +23,7 @@ namespace Domain
 
         public DbSet<Rating> Ratings { get; set; }
 
-        public MeetUkraineContext() { }
+        public MeetUkraineContext( ):base() { }
 
         public MeetUkraineContext(DbContextOptions<MeetUkraineContext> options) : base(options)
         {

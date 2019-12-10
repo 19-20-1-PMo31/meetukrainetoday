@@ -11,20 +11,25 @@ using Domain.Entities;
 
 namespace MeetUkraineASP.Controllers
 {
-    [Authorize(Roles ="Admin,Traveller")]
+    [Authorize(Roles = "Admin,Traveller")]
+
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index([FromServices] MeetUkraineContext ctx)
         {
             string a = "hey";
             ViewBag.data = a;
-            List<Place> places = new List<Place>();
-            using(var ctx = new MeetUkraineContext())
-            {
-                places = ctx.Places.ToList();
-            }
-            ViewBag.places = places;
 
+            //using (var ctx = new MeetUkraineContext() )
+            
+                List<Place> places = new List<Place>();
+                places = ctx.Places.ToList();
+                //places.Count();
+                //ViewBag.places = ctx.Places.ToList();
+                ViewBag.Places = places;
+                ViewBag.Size = places.Count;
+                
+            
             return View();
         }
 
@@ -35,11 +40,11 @@ namespace MeetUkraineASP.Controllers
         }
 
 
-        public ActionResult SetNewPlace(Place newPlace)
+        public ActionResult SetNewPlace([FromServices] MeetUkraineContext a, Place newPlace)
         {
-            using (var a = new MeetUkraineContext() )
+            //using (var a = new MeetUkraineContext() )
             {
-                a.Places.Add(new Place());
+                a.Places.Add(newPlace);
                 a.SaveChanges();
             }
             return View("Index");

@@ -8,6 +8,7 @@ using MeetUkraineASP.Models;
 using Microsoft.AspNetCore.Authorization;
 using Domain;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeetUkraineASP.Controllers
 {
@@ -88,8 +89,9 @@ namespace MeetUkraineASP.Controllers
         public ActionResult AllPlaces([FromServices] MeetUkraineContext a)
         {
             //using (var a = new MeetUkraineContext())
-            
-            List<Place> places = a.Places.ToList();
+
+
+            List<Place> places = a.Places.Include(u => u.Address).ToList();
             
             return View(places);
         }

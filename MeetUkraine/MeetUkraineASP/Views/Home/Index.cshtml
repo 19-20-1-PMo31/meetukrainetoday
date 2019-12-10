@@ -8,40 +8,132 @@
 
 
 
+@*<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d23104.443436704943!2d24.0266805754781!3d49.84311707819176!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add72f9bc6a89%3A0xf9783fecb4fecf1f!2z0JvRjNCy0L7QstGB0LrQuNC5INC90LDRhtC40L7QvdCw0LvRjNC90YvQuSDQsNC60LDQtNC10LzQuNGH0LXRgdC60LjQuSDRgtC10LDRgtGAINC-0L_QtdGA0Ysg0Lgg0LHQsNC70LXRgtCwINC40LzQtdC90Lgg0KHQvtC70L7QvNC40Lgg0JrRgNGD0YjQtdC70YzQvdC40YbQutC-0Lk!5e0!3m2!1sru!2sua!4v1575840880952!5m2!1sua!2sua" width="1000" height="600" frameborder="1" style="border:thin;" allowfullscreen=""></iframe>*@
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d23104.443436704943!2d24.0266805754781!3d49.84311707819176!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add72f9bc6a89%3A0xf9783fecb4fecf1f!2z0JvRjNCy0L7QstGB0LrQuNC5INC90LDRhtC40L7QvdCw0LvRjNC90YvQuSDQsNC60LDQtNC10LzQuNGH0LXRgdC60LjQuSDRgtC10LDRgtGAINC-0L_QtdGA0Ysg0Lgg0LHQsNC70LXRgtCwINC40LzQtdC90Lgg0KHQvtC70L7QvNC40Lgg0JrRgNGD0YjQtdC70YzQvdC40YbQutC-0Lk!5e0!3m2!1sru!2sua!4v1575840880952!5m2!1sua!2sua" width="1000" height="600" frameborder="1" style="border:thin;" allowfullscreen=""></iframe>
+
+<script>
+    var map;
+    function init_map() {
+        var opts = { 'center': new google.maps.LatLng(35.567980458012094, 51.4599609375), 'zoom': 5, 'mapTypeId': google.maps.MapTypeId.ROADMAP }
+        map = new google.maps.Map(document.getElementById('mapdiv'), opts);
+
+        google.maps.event.addListener(map, 'click', function (event) {
+            document.getElementById('latlongclicked').value = event.latLng.lat()
+            document.getElementById('lotlongclicked').value = event.latLng.lng()
+        });
+
+        google.maps.event.addListener(map, 'mousemove', function (event) {
+            document.getElementById('latspan').innerHTML = event.latLng.lat()
+            document.getElementById('lngspan').innerHTML = event.latLng.lng()
+        });
+
+    }
+    google.maps.event.addDomListener(window, 'load', init_map);
+</script>
+
+
+
 
 @if (User.IsInRole("Admin"))
 {
-<form method="post" action="/Home/SetNewPlace">
-    <input name="PlaceName" type="text">
-    @*<input name="AddressId" type="number">*@
-    <input name="Address.City" type="text">
-    <input name="Address.Street" type="text">
-    <input name="Address.Building" type="text">
+    @*<form method="post" action="/Home/SetNewPlace">
+        <input name="PlaceName" type="text">
+        <input name="Address.City" type="text">
+        <input name="Address.Street" type="text">
+        <input name="Address.Building" type="text">
 
-    <input name="Longtitude" type="text">
-    <input name="Latitude" type="text">
-    @*<input name="PhotoId" type="number">*@
-    <input name="PhotoUrl" type="text">
-    <input name="Place" type="text">
+        <input name="Longtitude" type="text">
+        <input name="Latitude" type="text">
+        <input name="PhotoUrl" type="text">
+        <input name="Place" type="text">
 
-    <input name="PhotoDate" type="datetime">
-    @*<input name="PhotoId" type="number">*@
+        <input name="PhotoDate" type="datetime">
 
-    <button type="submit">Go Add</button>
-</form>
+        <button type="submit">Go Add</button>
+    </form>*@
+       <form method="post" action="/Home/SetNewPlace">
+        <fieldset>
+
+        <!-- Form Name -->
+
+
+        <legend>Додати нове місце</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Назва місця</label>  
+          <div class="col-md-6">
+          <input name="PlaceName" type="text" placeholder="" class="form-control input-md">
+    
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Довгота</label>  
+          <div class="col-md-5">
+          <input name="Longtitude" type="text" placeholder="" class="form-control input-md">
+    
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Широта</label>  
+          <div class="col-md-5">
+          <input name="Latitude" type="text" placeholder="" class="form-control input-md">
+    
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Місто</label>  
+          <div class="col-md-4">
+          <input name="Address.City" type="text" placeholder="Львів" class="form-control input-md">
+    
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Вулиця</label>  
+          <div class="col-md-5">
+          <input name="Address.Street" type="text" placeholder="вул.Лесі Українки" class="form-control input-md">
+    
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Будинок</label>  
+          <div class="col-md-2">
+          <input name="Address.Building" type="text" placeholder="34" class="form-control input-md">
+    
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="singlebutton"></label>
+          <div class="col-md-4">
+            <button  type="submit" class="btn btn-primary">Додати</button>
+          </div>
+        </div>
+
+
+        </fieldset>
+        </form>
 }
 
 @if (User.IsInRole("Admin") || User.IsInRole("Traveller"))
 {
-<ul>
-    @for (int i = 0; i < ViewBag.Size ; i++)
-    {
-        <li>@ViewBag.Places[i].PlaceName</li>
-        <a href="/Home/AddComent/@ViewBag.Places[i].PlaceId"> add comment for @ViewBag.Places[i].PlaceName</a>
-    }
-</ul>
+    <ul>
+        @for (int i = 0; i < ViewBag.Size; i++)
+        {
+            <li>@ViewBag.Places[i].PlaceName</li>
+            <a href="/Home/AddComent/@ViewBag.Places[i].PlaceId"> add comment for @ViewBag.Places[i].PlaceName</a>
+        }
+    </ul>
 }
 
 <h4>dddd</h4>

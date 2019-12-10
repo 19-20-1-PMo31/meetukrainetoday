@@ -31,7 +31,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="qqq">
         @foreach (var item in Model)
         {
             <tr>
@@ -74,16 +74,20 @@
         function initMap() {
 
             var els = document.getElementsByClassName("GoogleMap");
-
             Array.prototype.forEach.call(els, function (el) {
                 console.log(el);
-                //var uluru = { lat: el.getAttribute("data-lat"), lng: el.getAttribute("data-lon") };
-                var uluru = { lat: 50.344, lng: 32.036 };
-                let map = new google.maps.Map(
+                var uluru = { lat: parseInt(el.getAttribute("data-lat")), lng: parseInt(el.getAttribute("data-lon") )};
+                //var uluru = { lat: 50.344, lng: 32.036 };
+                var map = new google.maps.Map(
                     el, { zoom: 5, center: uluru });
-                let marker = new google.maps.Marker({
+                //let marker = new google.maps.Marker({
+                //    position: uluru,
+                //    map: el
+                //});
+                //var myLatlng = new google.maps.LatLng(-25.363882, 131.044922);
+                var marker = new google.maps.Marker({
                     position: uluru,
-                    map: el
+                    map: map
                 });
             });
 

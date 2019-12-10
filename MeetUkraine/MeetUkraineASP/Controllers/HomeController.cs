@@ -21,15 +21,15 @@ namespace MeetUkraineASP.Controllers
             ViewBag.data = a;
 
             //using (var ctx = new MeetUkraineContext() )
-            
-                List<Place> places = new List<Place>();
-                places = ctx.Places.ToList();
-                //places.Count();
-                //ViewBag.places = ctx.Places.ToList();
-                ViewBag.Places = places;
-                ViewBag.Size = places.Count;
-                
-            
+
+            List<Place> places = new List<Place>();
+            places = ctx.Places.ToList();
+            //places.Count();
+            //ViewBag.places = ctx.Places.ToList();
+            ViewBag.Places = places;
+            ViewBag.Size = places.Count;
+
+
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace MeetUkraineASP.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddComent(int PlaceId , PlaceComment comment)
+        public ActionResult AddComent(int PlaceId, PlaceComment comment)
         {
             using (var a = new MeetUkraineContext())
             {
@@ -68,6 +68,39 @@ namespace MeetUkraineASP.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult AddNewPlace()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult AddNewPlace([FromServices] MeetUkraineContext a, Place newPlace)
+        {
+            //using (var a = new MeetUkraineContext())
+            {
+                a.Places.Add(newPlace);
+                a.SaveChanges();
+            }
+            return View("Index");
+        }
+
+        public ActionResult AllPlaces([FromServices] MeetUkraineContext a)
+        {
+            //using (var a = new MeetUkraineContext())
+            
+            List<Place> places = a.Places.ToList();
+            
+            return View(places);
+        }
+
+        //[HttpPost]
+        //public ActionResult AddToFavourite([FromServices] MeetUkraineContext a, int id)
+        //{
+        //    User s = a.Users.Where(user => user.FirstName == User.Identity.Name).FirstOrDefault();
+        //    s.PlaceStatuses.Add(a.Places.Where(place => place.PlaceId == id));
+        //    a.SaveChanges();
+        //    return RedirectToAction("AllPlaces");
+        //}
     }
 }

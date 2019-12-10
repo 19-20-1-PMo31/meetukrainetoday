@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Domain.Entities.Place>
+
+@{
+    ViewData["Title"] = "AllPlaces";
+}
+
+<h2>AllPlaces</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Longtitude)*@
+                Position
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.Building)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Longtitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Latitude)
+                    </td>*@
+                <td>
+                    <div class="GoogleMap" data-lon="@item.Longtitude" data-lat="@item.Latitude"></div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Photo.PhotoUrl)
+                </td>
+                <td>
+                    <a asp-action="AddToFavourite" asp-route-id="@item.PlaceId">Add to favourite</a> 
+                    @*<a asp-action="Details" asp-route-id="@item.PlaceId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PlaceId">Delete</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        let marker;
+
+        function initMap() {
+
+            var els = document.getElementsByClassName("GoogleMap");
+
+            Array.prototype.forEach.call(els, function (el) {
+                // Do stuff here
+                var uluru = { lat: el.getAttribute("data-lat"), lng: el.getAttribute("data-lon") };
+
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: el
+                });
+            });
+
+
+        }
+
+      
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATtAtvM1V2tpg9HAcmQNKIrTV9hHwevOw&callback=initMap">
+    </script>
+    <style>
+        /* Set the size of the div element that contains the map */
+        .map {
+            height: 200px; /* The height is 400 pixels */
+            width: 500px; /* The width is the width of the web page */
+        }
+    </style>
+}

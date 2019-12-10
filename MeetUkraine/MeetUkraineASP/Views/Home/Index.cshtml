@@ -13,15 +13,15 @@
 
 @if (User.IsInRole("Admin"))
 {
-<form method="post" action="/Home/SetNewPlace">
-    <input name="PlaceName" type="text">
+@*<form method="post" action="/Home/SetNewPlace">
+    <input name="PlaceName" type="text">*@
     @*<input name="AddressId" type="number">*@
-    <input name="Address.City" type="text">
+    @*<input name="Address.City" type="text">
     <input name="Address.Street" type="text">
     <input name="Address.Building" type="text">
 
-    <input name="Longtitude" type="text">
-    <input name="Latitude" type="text">
+    <input name="Longtitude" type="text">*@
+    @*<input name="Latitude" type="text">*@
     @*<input name="PhotoId" type="number">*@
     @*<input name="PhotoUrl" type="text">*@
     @*<input name="Place" type="text">*@
@@ -29,8 +29,8 @@
     @*<input name="PhotoDate" type="datetime">*@
     @*<input name="PhotoId" type="number">*@
 
-    <button type="submit">Go Add</button>
-</form>
+    @*<button type="submit">Go Add</button>
+</form>*@
 }
 
 @if (User.IsInRole("Admin") || User.IsInRole("Traveller"))

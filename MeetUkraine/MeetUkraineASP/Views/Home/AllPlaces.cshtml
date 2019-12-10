@@ -25,9 +25,9 @@
             @*<th>
                     @Html.DisplayNameFor(model => model.Latitude)
                 </th>*@
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Photo)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -39,7 +39,7 @@
                     @Html.DisplayFor(modelItem => item.PlaceName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address.Building)
+                    @Html.DisplayFor(modelItem => item.Address.Street)
                 </td>
                 @*<td>
                         @Html.DisplayFor(modelItem => item.Longtitude)
@@ -50,9 +50,9 @@
                 <td>
                     <div class="GoogleMap" data-lon="@item.Longtitude" data-lat="@item.Latitude"></div>
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Photo.PhotoUrl)
-                </td>
+                </td>*@
                 <td>
                     <a asp-action="AddToFavourite" asp-route-id="@item.PlaceId">Add to favourite</a> 
                     @*<a asp-action="Details" asp-route-id="@item.PlaceId">Details</a> |
@@ -71,16 +71,17 @@
     <script>
 
         let marker;
-
         function initMap() {
 
             var els = document.getElementsByClassName("GoogleMap");
 
             Array.prototype.forEach.call(els, function (el) {
-                // Do stuff here
-                var uluru = { lat: el.getAttribute("data-lat"), lng: el.getAttribute("data-lon") };
-
-                var marker = new google.maps.Marker({
+                console.log(el);
+                //var uluru = { lat: el.getAttribute("data-lat"), lng: el.getAttribute("data-lon") };
+                var uluru = { lat: 50.344, lng: 32.036 };
+                let map = new google.maps.Map(
+                    el, { zoom: 5, center: uluru });
+                let marker = new google.maps.Marker({
                     position: uluru,
                     map: el
                 });
@@ -97,7 +98,7 @@
     </script>
     <style>
         /* Set the size of the div element that contains the map */
-        .map {
+        .GoogleMap {
             height: 200px; /* The height is 400 pixels */
             width: 500px; /* The width is the width of the web page */
         }

@@ -15,6 +15,7 @@ Logical entities: Users, Ratings, PlaceComments, Addresses, Photos, Places, Save
 Business logic:
 •	Places – objects that are marked on the map. They are characterized by an ID and their own unique name.
 •	Users -  can save places to its own bookmark for later viewing and can leave rating.
+
 Tables and their description:
 •	Users – a table that contains information about a registered user (FirstName, LastName, UserLogin, UserPassword, E-mail).
 
@@ -71,6 +72,7 @@ User:
 2. Видалення місць
 3. Додавання нових фото
 4. Видалення фото
+
 Користувач:
 1. Додавання оцінок відвіданому місцю
 2. Додавання до закладок місць

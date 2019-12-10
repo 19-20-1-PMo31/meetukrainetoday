@@ -11,19 +11,24 @@ using Domain.Entities;
 
 namespace MeetUkraineASP.Controllers
 {
-    [Authorize(Roles ="Admin,Traveller")]
+    [Authorize(Roles = "Admin,Traveller")]
+
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index([FromServices] MeetUkraineContext ctx)
         {
             string a = "hey";
             ViewBag.data = a;
+
+            //using (var ctx = new MeetUkraineContext() )
+
             List<Place> places = new List<Place>();
-            using(var ctx = new MeetUkraineContext())
-            {
-                places = ctx.Places.ToList();
-            }
-            ViewBag.places = places;
+            places = ctx.Places.ToList();
+            //places.Count();
+            //ViewBag.places = ctx.Places.ToList();
+            ViewBag.Places = places;
+            ViewBag.Size = places.Count;
+
 
             return View();
         }
@@ -35,11 +40,11 @@ namespace MeetUkraineASP.Controllers
         }
 
 
-        public ActionResult SetNewPlace(Place newPlace)
+        public ActionResult SetNewPlace([FromServices] MeetUkraineContext a, Place newPlace)
         {
-            using (var a = new MeetUkraineContext() )
+            //using (var a = new MeetUkraineContext() )
             {
-                a.Places.Add(new Place());
+                a.Places.Add(newPlace);
                 a.SaveChanges();
             }
             return View("Index");
@@ -52,7 +57,7 @@ namespace MeetUkraineASP.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddComent(int PlaceId , PlaceComment comment)
+        public ActionResult AddComent(int PlaceId, PlaceComment comment)
         {
             using (var a = new MeetUkraineContext())
             {
@@ -62,5 +67,40 @@ namespace MeetUkraineASP.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public ActionResult AddNewPlace()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddNewPlace([FromServices] MeetUkraineContext a, Place newPlace)
+        {
+            //using (var a = new MeetUkraineContext())
+            {
+                a.Places.Add(newPlace);
+                a.SaveChanges();
+            }
+            return View("Index");
+        }
+
+        public ActionResult AllPlaces([FromServices] MeetUkraineContext a)
+        {
+            //using (var a = new MeetUkraineContext())
+            
+            List<Place> places = a.Places.ToList();
+            
+            return View(places);
+        }
+
+        //[HttpPost]
+        //public ActionResult AddToFavourite([FromServices] MeetUkraineContext a, int id)
+        //{
+        //    User s = a.Users.Where(user => user.FirstName == User.Identity.Name).FirstOrDefault();
+        //    s.PlaceStatuses.Add(a.Places.Where(place => place.PlaceId == id));
+        //    a.SaveChanges();
+        //    return RedirectToAction("AllPlaces");
+        //}
     }
 }

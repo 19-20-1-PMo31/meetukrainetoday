@@ -75,9 +75,9 @@ namespace MeetUkraineASP.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNewPlace(Place newPlace)
+        public ActionResult AddNewPlace([FromServices] MeetUkraineContext a, Place newPlace)
         {
-            using (var a = new MeetUkraineContext())
+            //using (var a = new MeetUkraineContext())
             {
                 a.Places.Add(newPlace);
                 a.SaveChanges();
@@ -85,14 +85,22 @@ namespace MeetUkraineASP.Controllers
             return View("Index");
         }
 
-        public ActionResult AllPlaces()
+        public ActionResult AllPlaces([FromServices] MeetUkraineContext a)
         {
-            List<Place> places;
-            using (var a = new MeetUkraineContext())
-            {
-                places = a.Places.ToList();
-            }
+            //using (var a = new MeetUkraineContext())
+            
+            List<Place> places = a.Places.ToList();
+            
             return View(places);
         }
+
+        //[HttpPost]
+        //public ActionResult AddToFavourite([FromServices] MeetUkraineContext a, int id)
+        //{
+        //    User s = a.Users.Where(user => user.FirstName == User.Identity.Name).FirstOrDefault();
+        //    s.PlaceStatuses.Add(a.Places.Where(place => place.PlaceId == id));
+        //    a.SaveChanges();
+        //    return RedirectToAction("AllPlaces");
+        //}
     }
 }

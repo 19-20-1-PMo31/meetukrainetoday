@@ -1,0 +1,78 @@
+                                                      Meet Ukraine Today
+
+Purpose:
+This site is intended to introduce foreigners to Ukraine. With Google Maps, they browse our country's landmarks, 
+post reviews, view photos, and bookmark the places they want to visit.
+
+Features:
+View landmarks of Ukraine, post reviews, view photos, and bookmark the places they want to visit.
+Storing all the bookmark activitity history.
+
+Administrator:  This user is responsible for managing the system.
+User: This user is a person who can view landmarks, post reviews, view photos, and bookmark the places they want to visit.
+Logical entities: Users, Ratings, PlaceComments, Addresses, Photos, Places, SavedPlaces.
+
+Business logic:
+•	Places – objects that are marked on the map. They are characterized by an ID and their own unique name.
+•	Users -  can save places to its own bookmark for later viewing and can leave rating.
+Tables and their description:
+•	Users – a table that contains information about a registered user (FirstName, LastName, UserLogin, UserPassword, E-mail).
+
+•	Rating – a table that contains user rating (from 0 to 10) about a visited place.
+
+•	PlaceComments – a table that contains comments from users about the place.
+
+•	Address – a table that contains a detailed location address about the place (City, Street, Building).
+
+•	Photos – a table that contains information about a photo (the date the photo was created and the URL).
+
+•	Places – a table that contains place information - name and coordinates (longitude and latitude).
+
+•	SavedPlaces – a table that contains the places the user saved.
+
+Processes:
+Administrator:
+1.	Adding new places
+2.	Removing places
+3.	Adding new photos
+4.	Delete a photo
+User:
+1.	Adding ratings to a place 
+2.	Bookmark places
+3.	Adding comments
+
+
+                                                    Meet Ukraine Today
+                                                    
+Наш сайт допоможе іноземним туристам краще пізнати Україну. За допомогою підібраних нами місць та відзначених на карті Google 
+вони можуть переглядати визначні місця нашої країни, додавати до закладок місця, які б вони хотіли відвідати, 
+переглядати фото та залишати відгуки про відвідані місця.
+
+Опис предметної області:
+                  Логічні сутності: Користувачі, Рейтинг, Коментарі, Адреси, Фото, Місця, Збережені місця.
+                  
+Бізнес логіка:
+• Місця - об’єкти, які позначені на карті. Характеризуються ID та власною унікальною назвою. 
+• Користувач - може зберігати місця у власний список для подальшого перегляду та може ставити оцінку (рейтинг).
+
+Таблиці та їх опис:
+●    Users - таблиця, яка містить інформацію про зареєстрованого користувача (ім’я, прізвище, E-mail, логін, пароль).
+●    Rating -  таблиця, яка містить оцінку користувача (від 0 до 10) про відвідане місце
+●    PlaceComments - таблиця, яка містить коментарі залишені користувачами про місце
+●    Address - таблиця, яка містить в собі детальну адресу місця (місто, вулицю і номер будинку).
+●    Photos - таблиця, яка містить в собі інформацію про фото (дата створення фотографії та URL адреса).
+●    Places - таблиця, яка містить інформацію про місце - назву та координати (довгота та широта).
+●     SavedPlaces - таблиця, яка містить  місця збережені користувачем.
+
+Процеси:
+
+Адміністратор:
+1. Додавання нових місць
+2. Видалення місць
+3. Додавання нових фото
+4. Видалення фото
+Користувач:
+1. Додавання оцінок відвіданому місцю
+2. Додавання до закладок місць
+3. Додавання коментарів
+ 

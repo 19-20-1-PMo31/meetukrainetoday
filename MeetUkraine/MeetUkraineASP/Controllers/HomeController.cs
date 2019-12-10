@@ -21,15 +21,15 @@ namespace MeetUkraineASP.Controllers
             ViewBag.data = a;
 
             //using (var ctx = new MeetUkraineContext() )
-            
-                List<Place> places = new List<Place>();
-                places = ctx.Places.ToList();
-                //places.Count();
-                //ViewBag.places = ctx.Places.ToList();
-                ViewBag.Places = places;
-                ViewBag.Size = places.Count;
-                
-            
+
+            List<Place> places = new List<Place>();
+            places = ctx.Places.ToList();
+            //places.Count();
+            //ViewBag.places = ctx.Places.ToList();
+            ViewBag.Places = places;
+            ViewBag.Size = places.Count;
+
+
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace MeetUkraineASP.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddComent(int PlaceId , PlaceComment comment)
+        public ActionResult AddComent(int PlaceId, PlaceComment comment)
         {
             using (var a = new MeetUkraineContext())
             {
@@ -66,6 +66,23 @@ namespace MeetUkraineASP.Controllers
                 a.SaveChanges();
             }
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult AddNewPlace()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddNewPlace(Place newPlace)
+        {
+            using (var a = new MeetUkraineContext())
+            {
+                a.Places.Add(newPlace);
+                a.SaveChanges();
+            }
+            return View("Index");
         }
     }
 }

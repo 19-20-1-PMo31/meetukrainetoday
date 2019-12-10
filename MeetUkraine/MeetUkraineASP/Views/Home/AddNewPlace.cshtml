@@ -1,0 +1,111 @@
+﻿@model Domain.Entities.Place
+
+@{
+    ViewData["Title"] = "AddNewPlace";
+}
+
+<h2>AddNewPlace</h2>
+
+<h4>Place</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddNewPlace" id="MainForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PlaceId" class="control-label"></label>
+                <input asp-for="PlaceId" class="form-control" />
+                <span asp-validation-for="PlaceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlaceName" class="control-label"></label>
+                <input asp-for="PlaceName" class="form-control" />
+                <span asp-validation-for="PlaceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressId" class="control-label"></label>
+                <input asp-for="AddressId" class="form-control" />
+                <span asp-validation-for="AddressId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longtitude" class="control-label"></label>
+                <input asp-for="Longtitude" class="form-control" id="Longtitude"/>
+                <span asp-validation-for="Longtitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitude" class="control-label"></label>
+                <input asp-for="Latitude" class="form-control" id="Latitude"/>
+                <span asp-validation-for="Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhotoId" class="control-label"></label>
+                <input asp-for="PhotoId" class="form-control" />
+                <span asp-validation-for="PhotoId" class="text-danger"></span>
+            </div>
+            <div id="map"></div>
+
+            <div class="form-group">
+                <input type="submit" id="sender" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            var uluru = { lat: 50.344, lng: 32.036 };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 5, center: uluru });
+            // The marker, positioned at Uluru
+            //var marker = new google.maps.Marker({ position: uluru, map: map });
+
+            map.addListener('click', function (e) {
+                placeMarker(e.latLng, map);
+            });
+
+            //document.getElementById('sender').addEventListener('click', function (e) {
+            //    e.preventDefault();
+            //})
+        }
+        let marker;
+
+        function placeMarker(position, map) {
+            if (marker) {
+                marker.setPosition(position);
+            }
+            else {
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map
+                });
+            }
+            document.getElementById('Longtitude').value = marker.position.lng();
+            document.getElementById('Latitude').value = marker.position.lat();
+            //console.log(position.lat());
+            //console.log(position.lng());
+        }
+        
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATtAtvM1V2tpg9HAcmQNKIrTV9hHwevOw&callback=initMap">
+    </script>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px; /* The height is 400 pixels */
+            width: 1000px; /* The width is the width of the web page */
+        }
+    </style>
+}

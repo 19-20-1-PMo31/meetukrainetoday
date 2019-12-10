@@ -84,5 +84,15 @@ namespace MeetUkraineASP.Controllers
             }
             return View("Index");
         }
+
+        public ActionResult AllPlaces()
+        {
+            List<Place> places;
+            using (var a = new MeetUkraineContext())
+            {
+                places = a.Places.ToList();
+            }
+            return View(places);
+        }
     }
 }
